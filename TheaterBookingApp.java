@@ -12,13 +12,10 @@ public class TheaterBookingApp {
     private static boolean[][] theaterSeats = new boolean[30][12];
 
     public static void main(String[] args) {
-        String menuInput;
         int menuChoice;
-
             do {
                 displayMenu();
-                menuInput = in.nextLine();
-                menuChoice = Integer.parseInt(menuInput);
+                menuChoice = getChoice();
                 try {
                     switch (menuChoice) {
                         case 1:
@@ -43,6 +40,27 @@ public class TheaterBookingApp {
         System.out.println("1. New booking");
         System.out.println("2. Cancel booking");
         System.out.println("3. Exit");
+    }
+
+    /**
+     * Gets a menu choice from the user and validates it.
+     * @return the menu choice.
+     */
+    public static int getChoice() {
+        String menuInput;
+        int menuChoice;
+        while(true) {
+            try {
+                menuInput = in.nextLine();
+                menuChoice = Integer.parseInt(menuInput);
+                if (menuChoice < 1 || menuChoice > 3) {
+                    throw new NumberFormatException();
+                }
+                return menuChoice;
+            } catch (NumberFormatException e) {
+                System.out.println("Please give a valid choice.Select a number from 1 to 3.");
+            }
+        }
     }
 
     /**
